@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Giacinto Carlucci - XMLHttpRequest</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+
+    //data used only in POST requests
+    const sendHttpRequest = (method, url, data) => {
+      //Adding promise
+        const promise = new Promise((resolve, reject) => {
+            //Creating XHR object
+            const xhr = new XMLHttpRequest();
+            xhr.open(method,url);
+            xhr.responseType = 'json';
+            //Signals that we are appending json data in POST
+            if (data){
+                xhr.setRequestHeader('Content-Type','application/json');
+            }
+            xhr.onload = () => {
+                //rejecting promise on status error
+                if(xhr.status >= 400) {
+                    reject(xhr.response);
+                } else {
+                    resolve(xhr.response);
+                }
+            };
+            //rejecting promise on response errors
+            xhr.onerror = () => {
+                reject('Something went wrong!');
+            };
+
+            //Appending JSON data when sending request
+            xhr.send(JSON.stringify(data));
+        });
+        //Returning promise
+        return promise
+    };
+
+    //Sending GET request
+    //Using .then() to retrieve data
+    const getData = () => {
+        sendHttpRequest('GET','https://reqres.in/api/users')
+        .then(responseData => {
+            console.log(responseData);
+        });
+    };
+
+    //Sending POST request
+    const sendData = () => {
+        sendHttpRequest('POST','https://reqres.in/api/register',{
+          email: 'eve.holt@reqres.in',
+          password: 'pistol'
+        }).then(responseData => {
+            console.log(responseData);
+        //catching and printing errors
+        }).catch(err => {
+             console.log(err);
+        });
+    };
+
+    //Sending POST request that returns an error
+    const sendDataError = () => {
+        sendHttpRequest('POST','https://reqres.in/api/register',{
+          email: 'eve.holt@reqres.in'
+          // password: 'pistol'
+        }).then(responseData => {
+            console.log(responseData);
+        //catching and printing errors
+        }).catch(err => {
+             console.log(err);
+        });
+    };
+    </script>
+
+  </head>
+
+  <body>
+    <center>
+      <h1>XMLHttpRequest example</h1>
+      <button type="button" name="button" onclick="getData()">GET request</button>
+      <button type="button" name="button" onclick="sendData()">POST request</button>
+      <button type="button" name="button" onclick="sendDataError()">POST request (error)</button>
+      <p>Use <b>F12</b> to enter in Developer tools in your browser and select <u>Console</u>, then click on the buttons above.</p>
+    </center>
+  </body>
+
+</html>

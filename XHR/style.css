@@ -1,0 +1,31 @@
+html{
+  background-color: #121212;
+  font-family: sans-serif;
+  color: #fff;
+}
+
+
+
+center{
+  margin: 200px auto;
+}
+
+button{
+  width:200px;
+  height:50px;
+  margin:5px;
+  background-color: rgba(162,127,0,0.2);
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+}
+
+button:hover{
+  background-color: rgba(162,127,0,0.5);
+}
+
+button:active{
+  border: 2px solid;
+  border-radius: 3px;
+  border-color: rgba(162,127,0,0.8);
+}
