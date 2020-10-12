@@ -4,8 +4,6 @@ html{
   color: #fff;
 }
 
-
-
 center{
   margin: 200px auto;
 }
@@ -28,4 +26,24 @@ button:active{
   border: 2px solid;
   border-radius: 3px;
   border-color: rgba(162,127,0,0.8);
+}
+
+#data-from-xhr{
+  text-align: center;
+}
+
+#data-from-xhr > div{
+  width: 200px;
+  margin: 20px;
+  padding: 20px;
+  display: inline-block;
+  border-radius: 10%;
+  background-color: #212121;
+  -webkit-box-shadow: 15px 0px 10px -10px rgba(0,0,0,0.51);
+  -moz-box-shadow: 15px 0px 10px -10px rgba(0,0,0,0.51);
+  box-shadow: 15px 0px 10px -10px rgba(0,0,0,0.51);
+}
+
+img{
+  border-radius: 50%;
 }
