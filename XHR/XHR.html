@@ -44,6 +44,7 @@
         sendHttpRequest('GET','https://reqres.in/api/users')
         .then(responseData => {
             console.log(responseData);
+            visualize(responseData.data);
         });
     };
 
@@ -72,6 +73,38 @@
              console.log(err);
         });
     };
+
+    // Visualize in HTML the data from GET requests
+    const visualize = (data) => {
+      // Referring to an existing element in HTML code
+      // (in this case <div id="data-from-xhr"></div>)
+      let div = document.getElementById('data-from-xhr')
+      // Clear div element
+      div.innerHTML = ''
+
+      // For every data element:
+      data.map(userData => {
+        // Create DOM elements
+        let user = document.createElement('div')
+        let avatar = document.createElement('img')
+        let email = document.createElement('p')
+        let fullName = document.createElement('p')
+
+        // Fill DOM elements with passed data
+        avatar.src=userData.avatar
+        email.innerText = userData.email
+        fullName.innerText = userData.first_name + userData.last_name
+
+        // Create a user node each one with avatar, email and fullName
+        user.appendChild(avatar)
+        user.appendChild(email)
+        user.appendChild(fullName)
+
+        // Append the user node to div in HTML
+        div.appendChild(user)
+
+      })
+    };
     </script>
 
   </head>
@@ -83,6 +116,7 @@
       <button type="button" name="button" onclick="sendData()">POST request</button>
       <button type="button" name="button" onclick="sendDataError()">POST request (error)</button>
       <p>Use <b>F12</b> to enter in Developer tools in your browser and select <u>Console</u>, then click on the buttons above.</p>
+      <div id="data-from-xhr"></div>
     </center>
   </body>
 
